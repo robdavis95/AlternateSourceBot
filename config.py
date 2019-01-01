@@ -1,8 +1,9 @@
+# COPYRIGHT Robert Davis - http://www.robertdavis.co.uk
 #Config
 
 client_id = ""
 client_secret = ""
-user_agent = "Robert Davis ( /u/Houstons-Problem / http://robertdavis.co.uk )"
+user_agent = "Robert Davis ( http://robertdavis.co.uk )"
 # Reddit Username
 username = ""
 #Reddit Password

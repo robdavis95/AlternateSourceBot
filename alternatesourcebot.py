@@ -1,3 +1,4 @@
+# COPYRIGHT Robert Davis - http://www.robertdavis.co.uk
 import praw
 import config
 import time
