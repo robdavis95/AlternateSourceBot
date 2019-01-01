@@ -9,17 +9,20 @@ cache = []
 
 def main():
 
-	print("\nLogging in")
+	postComment = false;
+
 	# Initialise Reddit instance and Log In
+	print("\nLogging in...")
 	reddit = praw.Reddit(username = config.username,
 					 	 password = config.password, 
 					 	 client_id = config.client_id,
 					 	 client_secret = config.client_secret, 
 					 	 user_agent = config.user_agent)
-	print("Logged in\n")
+	print("Logged in...\n")
 
 	# List of domains to check
 	domains = ["dailymail.co.uk"]
+
 	# Number of reddit posts/submissions returned, for each domain
 	submission_limit = 4
 
@@ -30,8 +33,7 @@ def main():
 		for submission in domain_search:
 			process_submission(submission)
 
-	print("\nFinished pass")
-	print("-------------\n")
+	print("\nFinished pass\n-------------\n")
 
 def process_search(reddit, domain, submission_limit):
 
@@ -48,7 +50,7 @@ def process_submission(submission):
 	searchResults = []
 
 	if len(post_title) > 15:
-		print("\n" + post_title + " / " + post_url)
+		print("\n\n\n\n\nREDDIT POST: '" + post_title + "'' / '" + post_url + "'")
 		formatted_post_title = format_post_title(post_title)
 		searchResults = web_search(formatted_post_title, post_url)
 		submit_comment(submission)
@@ -56,7 +58,7 @@ def process_submission(submission):
 
 def format_post_title(post_title):
 	# TO-DO processing of the post title here
-	print("\nFormatting post title")
+	print("\nFormatting post title...")
 	# 1. Remove any domains / domain names eg [facebook.com]
 	post_title = post_title.replace("http://","")
 	post_title = post_title.replace("www.","")
@@ -72,7 +74,7 @@ def format_post_title(post_title):
 	# 		print("")
 	# 5. Output and return
 	formatted_post_title = post_title
-	print("Searching the web with results matching: " + formatted_post_title)
+	print("Searching the web for results matching: '" + formatted_post_title + "'\n")
 	return formatted_post_title
 
 def web_search(formatted_post_title, post_url):
@@ -81,13 +83,16 @@ def web_search(formatted_post_title, post_url):
 	# Formatting json Data
 	searchUrl = response.json()
 	searchResults = []
+	# The maximum number of returned google results for each reddit post
+	googleSearchLimit = 4;
 
 	#TO-DO output all results from google search
 	
 	if (searchUrl["searchInformation"]["totalResults"] != "0"):
-		for i in range(0, 4):
+		for i in range(0, googleSearchLimit):
 			searchResults.append(searchUrl["items"][i]["title"])
-			print(searchUrl["items"][i]["displayLink"] + " / " + searchUrl["items"][i]["title"] + " / " + searchUrl["items"][i]["link"])
+			print("GOOGLE RESULT: " + searchUrl["items"][i]["displayLink"] + " / " + searchUrl["items"][i]["title"] + " / " + searchUrl["items"][i]["link"])
+
 	else:
 		print("\tNO RESULTS FOUND: Continuing to next post")
 
