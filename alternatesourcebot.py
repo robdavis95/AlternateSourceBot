@@ -142,5 +142,6 @@ def debug_format_json(searchUrl):
 
 while True:
 	main()
-	# Runs every 100 seconds
-	time.sleep(100)
+	# Script every loopTimer seconds
+	loopTimer = 100
+	time.sleep(loopTimer)
